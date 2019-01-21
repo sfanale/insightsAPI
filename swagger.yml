@@ -1,0 +1,130 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that describes the functionality of this api. To make a request, remove /ui and
+   add the relevant path.
+  version: "1.0.0"
+  title: Fanale Research Insights Api
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /get/{id}:
+      get:
+        operationId: handleInsightsRequests.getOneBlog
+        tags:
+          - insights
+        summary: Retrieve information for a single blog post
+        description: Retrieve information for a single blog post.
+        parameters:
+          - name: id
+            in: path
+            description: Stock ticker symbol for asset
+            type: string
+            required: True
+        responses:
+          200:
+            description: Successfully found stock
+            schema:
+              type: array
+              items:
+                properties:
+                  author:
+                    type: string
+                  id:
+                    type: string
+                  content:
+                    type: string
+                  title:
+                    type: string
+                  date:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  tags:
+                    type: string
+                  views:
+                    type: string
+
+  /getall:
+    get:
+      operationId: handleInsightsRequests.getAllBlogs
+      tags:
+      - insights
+      summary: Retrieve information for a all posts
+      description: Retrieve information for all posts
+      responses:
+        200:
+          description: Successfully found stock
+          schema:
+            type: array
+            items:
+              properties:
+                author:
+                  type: string
+                id:
+                  type: string
+                content:
+                  type: string
+                title:
+                  type: string
+                date:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                tags:
+                  type: string
+                views:
+                  type: string
+
+
+  /post/blog:
+    post:
+      operationId: handleInsightsRequests.postBlog
+      tags:
+      - insights
+      summary: Retrieve information for a single blog post
+      description: Retrieve information for a single blog post.
+      consumes:
+        - application/json
+      parameters:
+      - name: body
+        in: body
+        description: The blog to post.
+        schema:
+          type: object
+          required:
+            - content
+          properties:
+            author:
+              type: string
+            date:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            content:
+              type: string
+            tags:
+              type: string
+            image:
+              type: string
+      responses:
+        201:
+          description: Successfully added blog
+
+
+
+
+
+
+
