@@ -21,14 +21,14 @@ def get_timestamp():
 
 def getAllBlogs():
     cur, conn = connect_to_db()
-    cur.execute("""SELECT author, date, title, description, content, tags, image, views from insights;""",)
+    cur.execute("""SELECT author, date, title, description, content, tags, image, views, id from insights;""",)
     all = cur.fetchall()
     response = []
     print(all)
     for result in all:
         print(result)
         response.append({'author': result[0], 'data': result[1], 'title': result[2], 'description':result[3], 'content': result[4],
-        'tags': result[5], 'imgae': result[6], 'views': result[7]})
+        'tags': result[5], 'imgae': result[6], 'views': result[7], 'id':result[8]})
     cur.close()
     conn.close()
     return flask.jsonify(response)
@@ -37,10 +37,10 @@ def getAllBlogs():
 
 def getOneBlog(id):
     cur, conn = connect_to_db()
-    cur.execute("""SELECT author, date, title, description, content, tags, image, views from insights WHERE id=%s;""", id)
+    cur.execute("""SELECT author, date, title, description, content, tags, image, views, id from insights WHERE id=%s;""", id)
     result = cur.fetchall()[0]
     response = {'author': result[0], 'data': result[1], 'title': result[2], 'description':result[3], 'content': result[4],
-        'tags': result[5], 'imgae': result[6], 'views': result[7]}
+        'tags': result[5], 'imgae': result[6], 'views': result[7], 'id': result[8]}
     cur.close()
     conn.close()
     return flask.jsonify(response)
