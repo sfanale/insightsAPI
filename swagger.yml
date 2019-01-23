@@ -13,7 +13,7 @@ basePath: /api
 
 # Paths supported by the server application
 paths:
-  /get/{id}:
+  /get/blog/{id}:
       get:
         operationId: handleInsightsRequests.getOneBlog
         tags:
@@ -23,12 +23,12 @@ paths:
         parameters:
           - name: id
             in: path
-            description: Stock ticker symbol for asset
+            description: id for article
             type: string
             required: True
         responses:
           200:
-            description: Successfully found stock
+            description: Successfully found article
             schema:
               type: array
               items:
@@ -51,6 +51,39 @@ paths:
                     type: string
                   views:
                     type: string
+
+  /get/learn/{id}:
+    get:
+      operationId: handleInsightsRequests.getOneLearn
+      tags:
+      - insights
+      summary: Retrieve information for a single learn article
+      description: Retrieve information for a single learn article.
+      parameters:
+      - name: id
+        in: path
+        description: article id
+        type: string
+        required: True
+      responses:
+        200:
+          description: Successfully found article
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                content:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                tags:
+                  type: string
 
   /getall:
     get:
@@ -83,6 +116,39 @@ paths:
                 tags:
                   type: string
                 views:
+                  type: string
+
+  /getall/learn:
+    get:
+      operationId: handleInsightsRequests.getAllLearn
+      tags:
+      - insights
+      summary: Retrieve information for all learns
+      description: Retrieve information for all learns.
+      parameters:
+      - name: id
+        in: path
+        description: article id
+        type: string
+        required: True
+      responses:
+        200:
+          description: Successfully found article
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                content:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                tags:
                   type: string
 
 
@@ -122,7 +188,37 @@ paths:
         201:
           description: Successfully added blog
 
-
+  /post/learn:
+    post:
+      operationId: handleInsightsRequests.postLearn
+      tags:
+      - learn
+      summary: post information for a single learn post
+      description: post information for a single learn post.
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        description: The blog to post.
+        schema:
+          type: object
+          required:
+          - content
+          properties:
+            title:
+              type: string
+            description:
+              type: string
+            content:
+              type: string
+            tags:
+              type: string
+            image:
+              type: string
+      responses:
+        201:
+          description: Successfully added blog
 
 
 
